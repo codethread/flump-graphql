@@ -1,5 +1,5 @@
 # BASE
-FROM node:8.11.1-alpine as base
+FROM node:10.15.3-alpine as base
 
 MAINTAINER AHDesigns
 
@@ -22,11 +22,10 @@ WORKDIR $APP_HOME
 
 COPY . .
 
-RUN ls ./scripts
 RUN npm run build
 
 # PROD
-FROM node:8.11.1-alpine
+FROM node:10.15.3-alpine
 
 COPY --from=base /app/prod_modules ./node_modules
 COPY --from=build /app/dist ./dist
